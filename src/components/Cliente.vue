@@ -10,6 +10,7 @@
         <p v-if="OPIdade"> Idade: {{ cliente.idade }} </p>
         <p v-else>Sem idade </p>
         <button @click="mudarClasse">Mudar classe</button>
+        <button @click="emitirEventoDelete"> Excluir </button>
 
 
 
@@ -38,6 +39,12 @@ export default {
     methods:{
         mudarClasse: function(){            
             this.IsPremium = !this.IsPremium;            
+        },
+        emitirEventoDelete: function(){
+            this.$emit("meDelete", {cod:this.cliente.cod, curso:"aqui vai o teste",emPromocao:true, component: this});
+        },
+        testar: function(){
+            console.log('Testando');
         }
     }
 }
