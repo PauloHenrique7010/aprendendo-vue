@@ -9,6 +9,7 @@
         <p> E-mail: {{ cliente.email }}</p>
         <p v-if="OPIdade"> Idade: {{ cliente.idade }} </p>
         <p v-else>Sem idade </p>
+        <button @click="mudarClasse($event)">Mudar classe</button>
 
 
 
@@ -33,6 +34,12 @@ export default {
     props:{   
         cliente : Object,
         OPIdade:Boolean,
+    },
+    methods:{
+        mudarClasse: function($event){
+            console.log($event)
+            this.IsPremium = !this.IsPremium;
+        }
     }
 }
 </script>
