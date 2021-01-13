@@ -3,11 +3,12 @@
         1 way -> atualiza em tempo real apenas a leitura
         2 way -> atualiza em tempo real a escrita e a leitura
     -->
-    <div id="cliente">
-        <h2>{{nome}}</h2>
+    <div :class="{'cliente':!IsPremium,'cliente-premium':IsPremium}">
+        <h2>{{cliente.nome}}</h2>
         <hr>
-        <p> E-mail: {{ email }}</p>
-        <p> Idade: {{ idade }} </p>
+        <p> E-mail: {{ cliente.email }}</p>
+        <p v-if="OPIdade"> Idade: {{ cliente.idade }} </p>
+        <p v-else>Sem idade </p>
 
 
 
@@ -26,22 +27,27 @@
 export default {
     data(){
         return {
-            
+            IsPremium: false,           
         }
     },
-    props:{
-        nome:String,
-        idade:Number,
-        descricao:String,
-        email:String,
-        numero:Number,
+    props:{   
+        cliente : Object,
+        OPIdade:Boolean,
     }
 }
 </script>
 
 <style scoped> /*Scoped siginifica que o style so se referenciara com este .vue*/
-  #cliente{
+  .cliente{
       background-color: #ECE5E3;
+      max-width: 600px;
+      height: 100%;
+      padding: 10px;
+      margin-top:8px;
+  }
+  .cliente-premium{
+      background-color: black;
+      color: rgb(248, 166, 59);
       max-width: 600px;
       height: 100%;
       padding: 10px;

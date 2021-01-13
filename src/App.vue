@@ -1,31 +1,60 @@
 <template>
   <div id="app">
-      <h1>Guia Clientes</h1>
+    <h1>Guia Clientes</h1>
+    <hr />
+   
+    <div v-for="(cliente, index) in clientes" :key="cliente.cod">
+      <p>{{ index+1 }} </p>
+      <Cliente :cliente="cliente" />
+      <br>
+      <h4>Edição</h4>
+      <input type="text" v-model="cliente.nome">
+      <br>
+      <input type="text" v-model="cliente.email">
       <hr>
-      <p> Altere o texto do input para alterar o primeiro cliente:
-      <input type="text" v-model="nome1">
-      <hr>
-      <Cliente :nome="nome1" idade="20" email="paulo@gmail.com"/>      
-      <Cliente nome="Rodrigão" idade="40" email="progr" />      
-      
-
+    </div>
   </div>
 </template>
 
 <script>
-import Cliente from './components/Cliente';
+import Cliente from "./components/Cliente";
 
 export default {
-  name: 'App',
-  data(){
-    return {
-      nome1:"Paulo1",
-    }
+  name: "App",
+  data() {
+    return {     
+      clientes: [
+        {
+          cod: 1,
+          nome: "Paulo",
+          email: "email objeto",
+          idade: 20,
+        },
+        {
+          cod: 2,
+          nome: "Rodrigo Objeto",
+          email: "rodrigo@gmail.com",
+          idade: 17,
+        },
+        {
+          cod: 3,
+          nome: "Douglas",
+          email: "douglas@uol.com.br",
+          idade: 44,
+        },
+        {
+          cod: 4,
+          nome: "fernando",
+          email: "fernando@uol.com.br",
+          idade: 38,
+        }
+      ],
+    };
   },
-  components: {
-    Cliente
-  }
-}
+  components: {    
+    Cliente,
+  },
+};
 </script>
 
 <style>
