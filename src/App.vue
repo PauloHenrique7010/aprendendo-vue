@@ -1,28 +1,32 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+      <h1>Guia Clientes</h1>
+      <hr>
+      <p> Altere o texto do input para alterar o primeiro cliente:
+      <input type="text" v-model="nome1">
+      <hr>
+      <Cliente :nome="nome1" idade="20" email="paulo@gmail.com"/>      
+      <Cliente nome="Rodrigão" idade="40" email="progr" />      
+      
+
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Cliente from './components/Cliente';
 
 export default {
   name: 'App',
+  data(){
+    return {
+      nome1:"Paulo1",
+    }
+  },
   components: {
-    HelloWorld
+    Cliente
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
