@@ -4,12 +4,12 @@
         2 way -> atualiza em tempo real a escrita e a leitura
     -->
     <div :class="{'cliente':!IsPremium,'cliente-premium':IsPremium}">
-        <h2>{{cliente.nome}}</h2>
+        <h2>{{cliente.cod +' - '+cliente.nome}}</h2>
         <hr>
         <p> E-mail: {{ cliente.email }}</p>
         <p v-if="OPIdade"> Idade: {{ cliente.idade }} </p>
         <p v-else>Sem idade </p>
-        <button @click="mudarClasse($event)">Mudar classe</button>
+        <button @click="mudarClasse">Mudar classe</button>
 
 
 
@@ -27,7 +27,7 @@
 <script>
 export default {
     data(){
-        return {
+        return {            
             IsPremium: false,           
         }
     },
@@ -36,9 +36,8 @@ export default {
         OPIdade:Boolean,
     },
     methods:{
-        mudarClasse: function($event){
-            console.log($event)
-            this.IsPremium = !this.IsPremium;
+        mudarClasse: function(){            
+            this.IsPremium = !this.IsPremium;            
         }
     }
 }
