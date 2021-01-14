@@ -11,6 +11,7 @@
         <p v-else>Sem idade </p>
         <button @click="mudarClasse">Mudar classe</button>
         <button @click="emitirEventoDelete"> Excluir </button>
+        <h4>id especial {{ codEspecial }} </h4>
 
 
 
@@ -27,44 +28,58 @@
 
 <script>
 export default {
-    data(){
-        return {            
-            IsPremium: false,           
-        }
+  data() {
+    return {
+      IsPremium: false,
+    };
+  },
+  props: {
+    cliente: Object,
+    OPIdade: Boolean,
+  },
+  methods: {
+    mudarClasse: function () {
+      this.IsPremium = !this.IsPremium;
     },
-    props:{   
-        cliente : Object,
-        OPIdade:Boolean,
+    emitirEventoDelete: function () {
+      this.$emit("meDelete", {
+        cod: this.cliente.cod,
+        curso: "aqui vai o teste",
+        emPromocao: true,
+        component: this,
+      });
     },
-    methods:{
-        mudarClasse: function(){            
-            this.IsPremium = !this.IsPremium;            
-        },
-        emitirEventoDelete: function(){
-            this.$emit("meDelete", {cod:this.cliente.cod, curso:"aqui vai o teste",emPromocao:true, component: this});
-        },
-        testar: function(){
-            console.log('Testando');
-        }
-    }
-}
+    testar: function () {
+      console.log("Testando");
+    },
+  },
+  computed: {
+    codEspecial: function () {
+      return (
+        this.cliente.email +
+        this.cliente.nome +
+        this.cliente.cod
+      ).toUpperCase();
+    },
+  },
+};
 </script>
 
-<style scoped> /*Scoped siginifica que o style so se referenciara com este .vue*/
-  .cliente{
-      background-color: #ECE5E3;
-      max-width: 600px;
-      height: 100%;
-      padding: 10px;
-      margin-top:8px;
-  }
-  .cliente-premium{
-      background-color: black;
-      color: rgb(248, 166, 59);
-      max-width: 600px;
-      height: 100%;
-      padding: 10px;
-      margin-top:8px;
-  }
-
+<style scoped>
+/*Scoped siginifica que o style so se referenciara com este .vue*/
+.cliente {
+  background-color: #ece5e3;
+  max-width: 600px;
+  height: 100%;
+  padding: 10px;
+  margin-top: 8px;
+}
+.cliente-premium {
+  background-color: black;
+  color: rgb(248, 166, 59);
+  max-width: 600px;
+  height: 100%;
+  padding: 10px;
+  margin-top: 8px;
+}
 </style>

@@ -7,12 +7,12 @@
     <input type="texto" placeholder="email"  v-model="emailField"/><br />
     <small id="erroIdade" class="erro"> Idade inválida </small><br>
     <input type="number" placeholder="idade"  v-model="idadeField"/> <br>
-    <button @click="cadastrar">cadastrar</button>
+    <button class="button is-primary" @click="cadastrar">cadastrar</button>
   
     <h1>Guia Clientes</h1>
     <hr />
 
-    <div v-for="(cliente) in clientes" :key="cliente.cod">
+    <div v-for="(cliente) in orderClientes" :key="cliente.cod">
       <!--<p>{{ index + 1 }}</p>-->
       <Cliente :cliente="cliente" @meDelete="deletarUsuario($event)" />
       <!--<br>
@@ -27,6 +27,7 @@
 
 <script>
 import Cliente from "./components/Cliente";
+import _ from 'lodash';
 
 export default {
   name: "App",
@@ -57,7 +58,7 @@ export default {
         },
         {
           cod: 4,
-          nome: "fernando",
+          nome: "Fernando",
           email: "fernando@uol.com.br",
           idade: 38,
         },
@@ -97,6 +98,11 @@ export default {
   components: {
     Cliente,
   },
+  computed:{
+    orderClientes: function(){
+      return _.orderBy(this.clientes,['nome']);
+    }
+  }
 };
 </script>
 
